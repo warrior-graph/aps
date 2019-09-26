@@ -1,1 +1,5 @@
 venv/
+*.db
+.vscode/
+__pycache__/
+paper_system/db.sqlite
