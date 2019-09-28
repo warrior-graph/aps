@@ -1,6 +1,6 @@
 import os
 
-from .utils import make_dir, INSTANCE_FOLDER_PATH
+from paper_system.utils import make_dir, INSTANCE_FOLDER_PATH
 
 class BaseConfig(object):
 

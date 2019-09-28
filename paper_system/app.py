@@ -1,8 +1,8 @@
 from flask import Flask
 
-from .config import DefaultConfig
-from .extensions import db
-from .utils import INSTANCE_FOLDER_PATH
+from paper_system.config import DefaultConfig
+from paper_system.extensions import db
+from paper_system.utils import INSTANCE_FOLDER_PATH
 
 
 __all__ = ['create_app']
@@ -17,8 +17,9 @@ def create_app(config=None, app_name=None):
     app = Flask(app_name, instance_path=INSTANCE_FOLDER_PATH, instance_relative_config=True)
 
     configure_app(app)
-    configure_extensions(app)
     configure_hook(app)
+    configure_blueprint(app)
+    configure_extensions(app)
     configure_cli(app)
 
     return app
@@ -29,6 +30,12 @@ def configure_app(app, config=None):
     
     if config:
         app.config.from_object(config)
+
+def configure_blueprint(app):
+    from .user import user
+    from .api import api
+    for bp in [user, api]:
+        app.register_blueprint(bp)
 
 def configure_extensions(app):
     db.init_app(app)

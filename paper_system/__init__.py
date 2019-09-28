@@ -1,1 +1,1 @@
-from .app import create_app
+from paper_system.app import create_app
