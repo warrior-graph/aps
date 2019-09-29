@@ -20,6 +20,3 @@ if BASE_DIR not in sys.path:
 # give wsgi the 'application'
 from paper_system import create_app
 application = create_app()
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')

@@ -1,9 +1,9 @@
 import os
 
-from paper_system.utils import make_dir, INSTANCE_FOLDER_PATH
+from paper_system.utils import INSTANCE_FOLDER_PATH
+
 
 class BaseConfig(object):
-
     PROJECT = 'paper_system'
 
     # Get app root path, also can use flask.root_path.
@@ -17,6 +17,7 @@ class BaseConfig(object):
 
     # http://flask.pocoo.org/docs/quickstart/#sessions
     SECRET_KEY = 'you-will-never-gess'
+    SECURITY_PASSWORD_SALT = 'you-will-never-gess'
 
     LOG_FOLDER = os.path.join(INSTANCE_FOLDER_PATH, 'logs')
 
@@ -26,8 +27,8 @@ class BaseConfig(object):
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     UPLOAD_FOLDER = os.path.join(INSTANCE_FOLDER_PATH, 'uploads')
 
-class DefaultConfig(BaseConfig):
 
+class DefaultConfig(BaseConfig):
     DEBUG = True
 
     SENTRY_DSN = ''
@@ -43,10 +44,8 @@ class DefaultConfig(BaseConfig):
     # QLALCHEMY_TRACK_MODIFICATIONS adds significant overhead and will be
     # disabled by default in the future.
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    # SQLITE for prototyping.
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + INSTANCE_FOLDER_PATH + '/db.sqlite'
-    # MYSQL for production.
-    #SQLALCHEMY_DATABASE_URI = 'mysql://username:password@server/db?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = \
+        'postgres://bycwfdqx:NuxjtS4FXDUdMuXPDVT5qqK_95OWPkUj@motty.db.elephantsql.com:5432/bycwfdqx'
 
 
 class TestConfig(BaseConfig):
